@@ -7,6 +7,7 @@ maggie.cloos@portnola.com
 """
 
 import sys
+import enum
 import json
 
 with open("input.json","r") as input:
@@ -56,12 +57,27 @@ create a dictionary of each customer that contains name & email
 write as a JSON file to a new file called email_list.json
 """
 
+temp2 = {}
+for value in customers["clients"]:
+    temp2[value["name"]] = value["email"]
+
+with open("email_list.json", "w") as outfile:
+   json.dump(temp2, outfile) 
+
 
 """
 3.
 open the original file & set each male customer isActive to false
 write the new data to a file called current_customers
 """
-    
+
+current_customers = customers
+for clients in customers["clients"]:
+    if clients["gender"] == "male":
+       clients["isActive"] = False
+
+with open("current_customers.json", "w") as outfile:
+    json.dump(current_customers, outfile)
+
 
 
